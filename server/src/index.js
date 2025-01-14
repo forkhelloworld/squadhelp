@@ -4,14 +4,17 @@ const cors = require('cors')
 require('./dbMongo/mongoose')
 const router = require('./router')
 const controller = require('./socketInit')
+const path = require('path')
 const handlerError = require('./handlerError/handler')
 
 const PORT = process.env.PORT || 3000
 const app = express()
 
+const staticPath = path.resolve(__dirname, '..', '..', '..', 'public/images')
+
 app.use(cors())
 app.use(express.json())
-app.use('/public', express.static('public'))
+app.use('/public/images', express.static(staticPath))
 app.use(router)
 app.use(handlerError)
 

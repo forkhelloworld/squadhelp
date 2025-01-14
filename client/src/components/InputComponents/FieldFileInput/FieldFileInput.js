@@ -1,4 +1,3 @@
-import React from 'react'
 import { Field } from 'formik'
 
 const FieldFileInput = ({ classes, ...rest }) => {
@@ -7,13 +6,16 @@ const FieldFileInput = ({ classes, ...rest }) => {
   return (
     <Field name={rest.name}>
       {props => {
-        const { field } = props
-
         const getFileName = () => {
           if (props.field.value) {
             return props.field.value.name
           }
           return ''
+        }
+
+        const fileHandler = e => {
+          const file = e.target.files[0]
+          props.form.setValues({ ...props.form.values, file })
         }
 
         return (
@@ -25,7 +27,7 @@ const FieldFileInput = ({ classes, ...rest }) => {
               {getFileName()}
             </span>
             <input
-              {...field}
+              onChange={fileHandler}
               className={fileInput}
               id='fileInput'
               type='file'

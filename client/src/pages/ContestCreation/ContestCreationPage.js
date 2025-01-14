@@ -71,10 +71,10 @@ const ContestCreationPage = props => {
   )
 }
 
-const mapStateToProps = state => {
-  const { contestStore, bundleStore } = state
-  return { contestStore, bundleStore }
-}
+const mapStateToProps = ({ contestStore, bundleStore } ) => ({
+  contestStore, 
+  bundleStore
+})
 
 const mapDispatchToProps = dispatch => ({
   saveContest: data => dispatch(saveContestToStore(data)),

@@ -50,7 +50,7 @@ const OfferForm = props => {
     resetForm()
   }
 
-  const { valid, addOfferError, clearOfferError } = props
+  const { addOfferError, clearOfferError } = props
   const validationSchema =
     props.contestType === CONTANTS.LOGO_CONTEST
       ? Schems.LogoOfferSchema
@@ -73,11 +73,9 @@ const OfferForm = props => {
       >
         <Form className={styles.form}>
           {renderOfferInput()}
-          {valid && (
-            <button type='submit' className={styles.btnOffer}>
-              Send Offer
-            </button>
-          )}
+          <button type='submit' className={styles.btnOffer}>
+            Send Offer
+          </button>
         </Form>
       </Formik>
     </div>
@@ -89,9 +87,8 @@ const mapDispatchToProps = dispatch => ({
   clearOfferError: () => dispatch(clearAddOfferError())
 })
 
-const mapStateToProps = state => {
-  const { addOfferError } = state.contestByIdStore
-  return { addOfferError }
-}
+const mapStateToProps = ({ addOfferError }) => ({
+  addOfferError
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferForm)
