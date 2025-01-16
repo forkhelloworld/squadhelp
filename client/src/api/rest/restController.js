@@ -17,15 +17,12 @@ export const downloadContestFile = data =>
   http.get(`downloadFile/${data.fileName}`)
 export const dataForContest = data => http.post('dataForContest', data)
 export const getCustomersContests = data =>
-  http.get(
-    'getCustomersContests',
-    { limit: data.limit, offset: data.offset },
-    {
-      headers: {
-        status: data.contestStatus
-      }
+  http.get('getCustomersContests', {
+    params: { limit: data.limit, offset: data.offset },
+    headers: {
+      status: data.contestStatus
     }
-  )
+  })
 export const getActiveContests = ({
   offset,
   limit,
@@ -36,17 +33,19 @@ export const getActiveContests = ({
   ownEntries
 }) =>
   http.get('getAllContests', {
-    offset,
-    limit,
-    typeIndex,
-    contestId,
-    industry,
-    awardSort,
-    ownEntries
+    params: {
+      offset,
+      limit,
+      typeIndex,
+      contestId,
+      industry,
+      awardSort,
+      ownEntries
+    }
   })
 export const getContestById = data =>
   http.get('getContestById', {
-    headers: {
+    params: {
       contestId: data.contestId
     }
   })
@@ -58,7 +57,7 @@ export const setOfferStatus = data => http.post('setOfferStatus', data)
 export const getPreviewChat = () => http.get('getPreview')
 export const changeChatFavorite = data => http.post('favorite', data)
 export const changeChatBlock = data => http.post('blackList', data)
-export const getDialog = data => http.get('getChat', data)
+export const getDialog = data => http.get('getChat', { params: data })
 
 export const removeChatFromCatalog = data =>
   http.delete('removeChatFromCatalog', data)

@@ -72,8 +72,10 @@ module.exports.addMessage = async (req, res, next) => {
 }
 
 module.exports.getChat = async (req, res, next) => {
-  const participants = [req.tokenData.userId, req.body.interlocutorId]
+  const interlocutorId = +req.query.interlocutorId
+  const participants = [req.tokenData.userId, interlocutorId]
   participants.sort((participant1, participant2) => participant1 - participant2)
+
   try {
     const messages = await Message.aggregate([
       {
@@ -99,8 +101,9 @@ module.exports.getChat = async (req, res, next) => {
     ])
 
     const interlocutor = await userQueries.findUser({
-      id: req.body.interlocutorId
+      id: interlocutorId
     })
+
     res.send({
       messages,
       interlocutor: {
