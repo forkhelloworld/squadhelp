@@ -10,10 +10,14 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import Header from '../../components/Header/Header'
 
 const StartContestPage = props => {
-  if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
-    props.history.replace('/')
+  if (props.userStore.data) {
+    if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
+      props.history.replace('/')
+    }  
+  } else {
+    props.history.replace('/login')
   }
-
+  
   const setBundle = bundleStr => {
     const array = bundleStr.toLowerCase().split('+')
     const bundleList = {}

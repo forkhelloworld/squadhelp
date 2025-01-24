@@ -7,6 +7,10 @@ import Header from '../../components/Header/Header'
 
 const Dashboard = props => {
   const { role, history } = props
+  if (!props.email) {
+    history.replace("/login")
+    return null
+  }
   return (
     <div>
       <Header />
