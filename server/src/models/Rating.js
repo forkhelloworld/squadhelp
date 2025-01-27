@@ -27,5 +27,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
+  Rating.associate = function (models) {
+    Rating.belongsTo(models.Users, { foreignKey: 'userId', targetKey: 'id' })
+    Rating.belongsTo(models.Offers, {
+      foreignKey: 'offerId',
+      targetKey: 'id'
+    })
+  }
+
   return Rating
 }
