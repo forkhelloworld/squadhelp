@@ -23,11 +23,13 @@ const FormInput = ({ classes, label, name, ...rest }) => (
             className={inputClassName}
             {...rest}
           />
-          <ErrorMessage
-            name={name}
-            component='span'
-            className={classes.warning}
-          />
+          {name !== 'message' ? (
+            <ErrorMessage
+              name={name}
+              component='span'
+              className={classes.warning}
+            />
+          ) : null}
         </div>
       )
     }}
