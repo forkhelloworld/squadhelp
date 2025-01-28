@@ -70,6 +70,7 @@ const OptionalSelects = props => {
         </>
       )
     }
+    default:
     case CONSTANTS.TAGLINE_CONTEST: {
       return (
         <>

@@ -22,6 +22,7 @@ const SliderBar = props => {
         return style.mainCarousel
       case carouselConstants.EXAMPLE_SLIDER:
         return style.exampleCarousel
+      default:
       case carouselConstants.FEEDBACK_SLIDER:
         return style.feedbackCarousel
     }
@@ -48,6 +49,7 @@ const SliderBar = props => {
           </div>
         ))
       }
+      default:
       case carouselConstants.FEEDBACK_SLIDER: {
         return Object.keys(props.images).map((key, index) => (
           <div className={style['feedback-cell']} key={index}>

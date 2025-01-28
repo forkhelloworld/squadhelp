@@ -1,10 +1,9 @@
 import { put } from 'redux-saga/effects'
 import ACTION from '../actions/actionTypes'
-import history from '../browserHistory'
 import CONSTANTS from '../constants'
 import * as restController from '../api/rest/restController'
 
-export function * paymentSaga (action) {
+export function* paymentSaga (action) {
   yield put({ type: ACTION.PAYMENT_ACTION_REQUEST })
   try {
     yield restController.payMent(action.data)
@@ -16,7 +15,7 @@ export function * paymentSaga (action) {
   }
 }
 
-export function * cashoutSaga (action) {
+export function* cashoutSaga (action) {
   yield put({ type: ACTION.PAYMENT_ACTION_REQUEST, data: action.data })
   try {
     const { data } = yield restController.cashOut(action.data)
