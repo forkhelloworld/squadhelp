@@ -1,0 +1,663 @@
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  font-family: 'Product Sans', sans-serif;
+}
+
+.site-header {
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #fbfbff;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 0.12);
+  padding: 1rem 0;
+  box-sizing: border-box;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 12px;
+
+    .logo {
+      width: 140px;
+    }
+    height: 100%;
+    .mid {
+      min-height: 100%;
+      nav {
+        display: none;
+        ul {
+          display: flex;
+          li {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: 0 10px;
+
+            a {
+              text-decoration: none;
+              color: #19184a;
+            }
+            span {
+              display: inline-block;
+              width: 20px;
+              height: 20px;
+              background-image: url(https://www.atom.com/html/html/html/static_images/icon-arrow-down.svg);
+              background-repeat: no-repeat;
+            }
+
+            .menu {
+              display: none;
+            }
+
+            &:hover {
+              a {
+                color: #637cf7;
+              }
+              span {
+                background-image: url(https://www.atom.com/html/html/html/static_images/icon-arrow-down-brand.svg);
+              }
+
+              .menu {
+                display: block;
+                position: absolute;
+                list-style: none;
+                width: 250px;
+                background: #fff;
+                box-shadow: 0 8px 40px rgb(0 0 0 / 0.06);
+                border-radius: 16px;
+                padding: 16px;
+                background-color: #fff;
+                top: 100%;
+                left: 0;
+                transition: all ease 0.3s;
+                z-index: 1;
+                margin: 10px 0 0 0;
+
+                li {
+                  display: block;
+                  color: rgb(23 23 23 / 0.8);
+                  padding: 8px 10px;
+                  font-size: 14px;
+                  border-radius: 8px;
+                  transition: all ease 0.3s;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .header-right {
+      img {
+        margin-left: 25px;
+      }
+    }
+  }
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    color: #000;
+    font-size: 20px;
+    margin: 10px 0;
+    font-weight: 700;
+  }
+
+  p {
+    color: #828282;
+    line-height: 1.5;
+    margin-bottom: 40px;
+  }
+}
+.how-does-work-section {
+  max-width: 1040px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  .wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0;
+    margin-top: 50px;
+    padding: 20px 0 30px;
+  }
+
+  .left {
+    max-width: 490px;
+    h4 {
+      display: inline-block;
+      color: #377dff;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 0.5rem 1rem;
+      background: rgba(55, 125, 255, 0.1);
+      border-color: transparent;
+      line-height: 21px;
+      border-radius: 20px;
+      margin: 0 0 8px;
+    }
+    h1 {
+      font-size: 40px;
+      max-width: 100%;
+      color: #19184a;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    p {
+      color: rgba(25, 24, 74, 0.5);
+      margin-bottom: 40px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+  }
+  .right {
+    position: relative;
+    width: 50%;
+    margin-top: 16px;
+    border-radius: 16px;
+    border-bottom: 3px solid #637cf7;
+    overflow: hidden;
+    .video {
+      padding-top: 56.25%;
+      iframe {
+        bottom: 0;
+        left: 0;
+        border: 0;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 990px) {
+    .wrapper {
+      flex-direction: column-reverse;
+      flex-wrap: wrap;
+      text-align: center;
+      margin-top: 0;
+
+      .right {
+        width: 100%;
+      }
+
+      .left {
+        max-width: 100%;
+        h4 {
+          margin-top: 40px;
+        }
+        h1 {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}
+
+.ways-to-use {
+  width: 100%;
+  background: #f4f7fc;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .wrapper {
+    text-align: center;
+    .caption {
+      margin: 0 0 40px 0;
+      h4 {
+        display: inline-block;
+        color: #377dff;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 0.5rem 1rem;
+        background: rgba(55, 125, 255, 0.1);
+        border-color: transparent;
+        line-height: 21px;
+        border-radius: 20px;
+        margin: 0 0 14px;
+      }
+      h2 {
+        font-size: 32px;
+        max-width: 100%;
+        color: #19184a;
+        font-weight: 700;
+      }
+      p {
+        margin: 20px 0;
+        color: #19184a;
+      }
+    }
+  }
+  .cards-container {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    .card {
+      max-width: 31%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 400px;
+      background-color: #ffffff;
+      border-radius: 24px;
+      padding: 25px 25px 4px;
+      margin: 0 0 30px;
+      box-shadow: 0 16px 32px rgb(0 0 0 / 0.04);
+      text-align: start;
+
+      .btn {
+        margin-bottom: 30px;
+        a {
+          display: inline-flex;
+          background: linear-gradient(-45deg, #5a73ed 0, #3d57d5 100%);
+          border-radius: 8px;
+          font-size: 16px;
+          color: #fff;
+          padding: 15px;
+          font-weight: 700;
+
+          span {
+            background-image: url('https://www.atom.com/public/images/build_brand/icon-arrow-long-right.svg');
+            background-repeat: no-repeat;
+            width: 30px;
+            height: 15px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+    @media (max-width: 990px) {
+      .card {
+        max-width: 48%;
+      }
+    }
+  }
+}
+
+.contest-steps {
+  width: 100%;
+  padding: 80px 0;
+  background: linear-gradient(
+      271.19deg,
+      rgb(68 51 241 / 0.04) 0%,
+      rgb(98 142 255 / 0.04) 100%
+    ),
+    #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .caption {
+    text-align: center;
+    margin-bottom: 40px;
+    img {
+      width: 70px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      padding-bottom: 35px;
+      color: #19184a;
+      font-size: calc(1.3rem + 0.6vw);
+    }
+  }
+  .container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    .item {
+      width: 23%;
+      box-shadow: 0 16px 32px rgb(0 0 0 / 0.04);
+      border-radius: 24px;
+      padding: 25px;
+      margin-bottom: 30px;
+
+      span {
+        display: inline-block;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 700;
+        height: 32px;
+        background: #4942f3;
+        border-radius: 20px;
+        line-height: 32px;
+        padding: 0 15px;
+        margin-bottom: 15px;
+      }
+    }
+    .item::before {
+      content: '';
+      width: 28px;
+      height: 14px;
+      display: block;
+      position: relative;
+      top: 50%;
+      left: 100%;
+      background-repeat: no-repeat;
+      margin: -2px 0 0 10px;
+      background-image: url('https://www.atom.com/html/html/html/static_images/contests/arrow-right.svg');
+    }
+
+    .item:last-child::before {
+      display: none;
+    }
+    @media (max-width: 990px) {
+      .item {
+        margin-bottom: 0;
+        width: 48%;
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.questions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  h3 {
+    color: #19184a;
+    font-size: calc(1.3rem + 0.6vw);
+    text-align: center;
+    margin-bottom: 35px;
+  }
+  .wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .tabs {
+      line-height: 1.5;
+      width: 100%;
+      max-width: 850px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      overflow: hidden;
+      background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.04),
+          rgba(0, 0, 0, 0.04)
+        ),
+        #ffffff;
+      border-radius: 16px;
+
+      span {
+        width: 25%;
+        text-align: center;
+        border-radius: 16px;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 13px 0px;
+        cursor: pointer;
+
+        &.active {
+          background: linear-gradient(45deg, #ff6955 0, #e97543 100%);
+          color: #fff;
+        }
+      }
+    }
+    .collection {
+      width: 100%;
+      max-width: 830px;
+      padding-top: 50px;
+      .content {
+        width: 100%;
+        h4 {
+          margin: 0px auto 30px auto;
+          color: #377dff;
+          font-size: 1.75rem;
+          font-weight: 700;
+          line-height: 1.3;
+        }
+
+        .container {
+          width: 100%;
+        }
+        .item {
+          border: 1px solid #f3f5fe;
+          border-radius: 16px;
+          transition: all ease 0.5s;
+          margin: 0 0 16px 0;
+          span {
+            display: inline-block;
+            width: 100%;
+            font-size: 20px;
+            font-weight: 700;
+            color: #19184a;
+            padding: 24px 70px 24px 24px;
+            position: relative;
+            cursor: pointer;
+            transition: all ease 0.5s;
+            border-radius: 16px;
+          }
+
+          span::before {
+            width: 25px;
+            height: 25px;
+            content: '';
+            display: block;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            margin-top: -12px;
+            background-image: url(https://www.atom.com/html/html/html/static_images/icon-plus.svg);
+            background-position: center center;
+          }
+        }
+        .item:hover {
+          border: 1px solid #307df6;
+          background-color: rgba(48, 125, 246, 0.1);
+        }
+      }
+    }
+  }
+}
+
+.search-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  .wrapper {
+    width: 100%;
+    border-bottom: 1px solid #edeff3;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    .search-input {
+      width: 100%;
+      background: linear-gradient(
+        45deg,
+        rgb(142 97 255 / 0.5333333333) 0,
+        #339bf7 50%,
+        rgb(43 198 215 / 0.431372549) 100%
+      );
+      border-radius: 30px;
+      padding: 2px;
+      margin: 0 auto 30px auto;
+      position: relative;
+      max-width: 650px;
+
+      .icon {
+        background-image: url(https://www.atom.com/public/images/search.svg);
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 21px;
+        left: 20px;
+      }
+      input {
+        border: none;
+        outline: 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 0 50px 0 48px;
+        background: #fff;
+        border-radius: 999px;
+        font-size: 24px;
+        height: 60px;
+        line-height: 60px;
+        color: #343434;
+        font-size: 18px;
+        font-weight: 400;
+        box-shadow: 0 16px 40px rgb(0 0 0 / 0.02);
+      }
+      button {
+        background: #ff6955;
+        width: 68px;
+        height: 54px;
+        padding: 0;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 40px;
+        transition: all ease 0.6s;
+        box-shadow: 3px 3px 10px 0 rgb(255 104 85 / 0.3);
+
+        span {
+          background-image: url(https://www.atom.com/public/images/bsg/search.svg);
+          width: 21px;
+          height: 21px;
+          display: inline-block;
+          background-position: center;
+          background-size: 100%;
+          position: relative;
+          top: 4px;
+        }
+      }
+    }
+
+    .tags-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      a {
+        display: inline-block;
+        margin: 0 12px 12px 0;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 6px 12px;
+        border-radius: 20px;
+        transition: all ease 0.3s;
+        color: #2b2aaa;
+        border: none;
+        background: rgb(43 42 170 / 0.1);
+        box-shadow: 0 1px 6px rgb(17 17 17 / 0.06);
+        backdrop-filter: blur(23.7219px);
+        line-height: 1.5;
+
+        &:hover {
+          background: none;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  .wrapper {
+    width: 100%;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #edeff3;
+  }
+  .container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .column {
+      padding-top: 40px;
+      flex: 0 0 auto;
+      width: 25%;
+
+      h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 20px 0;
+        position: relative;
+        line-height: 1.3;
+        color: #222;
+      }
+
+      a {
+        font-size: 14px;
+        display: block;
+        color: #222;
+        transition: all ease 0.3s;
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+
+      .inner {
+        margin: 20px 0;
+        padding-top: 40px;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .wrapper {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .wrapper {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    max-width: 1140px;
+    .head-nav {
+      display: block !important;
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .wrapper {
+    max-width: 1320px;
+  }
+}
