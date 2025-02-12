@@ -224,5 +224,10 @@ export default {
         value => value && value.trim().length >= 1
       )
       .required('required')
-  })
+  }),
+  EventSchema: yup.object({
+    name: yup.string().required("Обов'язкове поле"),
+    date: yup.string().required("Обов'язкове поле"),
+    time: yup.string().required("Обов'язкове поле")
+  }),
 }
