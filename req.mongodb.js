@@ -1,5 +1,4 @@
-use("shm-chat");
-db.getCollection("messages").aggregate([
+db.messages.aggregate([
   {
     $match: {
       body: { $regex: "паровоз", $options: 'i' }
