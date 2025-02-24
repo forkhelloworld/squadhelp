@@ -335,7 +335,7 @@ module.exports.getContests = (req, res, next) => {
 
 module.exports.getOffers = async (req, res, next) => {
   try {
-    const offers = await db.Offers.findAll({ order: [['id', 'DESC']] })
+    const offers = await db.Offers.findAll({ order: [['id', 'DESC']], limit: 8, offset:req.query.offset })
     res.status(200).send({ offers })
   } catch (error) {
     next(error)

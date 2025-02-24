@@ -52,7 +52,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-
+  
   button {
     padding: 8px 16px;
     border: none;
@@ -60,23 +60,51 @@
     border-radius: 5px;
     font-size: 14px;
     font-weight: bold;
-
+    
     &.accept {
       background-color: #8aca6b;
       color: white;
-
+      
       &:hover {
         background-color: rgba(138, 202, 107, 0.7);
       }
     }
-
+    
     &.reject {
       background-color: #cd5c5c;
       color: white;
-
+      
       &:hover {
         background-color: rgba(205, 92, 92, 0.7);
       }
     }
   }
+}
+
+.button {
+  padding: 10px 20px;
+  border: 2px solid #28D2D1;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #28D2D1;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: #28D2D1;
+  color: #fff;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.pagination {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }

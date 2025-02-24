@@ -55,7 +55,7 @@ export const setOfferStatus = data => http.post('setOfferStatus', data)
 export const getOffers = data =>
   http.get('getOffers', {
     params: {
-      data
+      offset: data.offset
     }
   })
 
