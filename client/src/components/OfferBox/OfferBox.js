@@ -105,7 +105,7 @@ const OfferBox = props => {
       conversationData: findConversationInfo()
     })
   }
-
+  
   const { data, role, id, contestType } = props
   const { avatar, firstName, lastName, email, rating } = props.data.User
   return (

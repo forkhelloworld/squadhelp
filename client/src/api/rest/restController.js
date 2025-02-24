@@ -52,6 +52,12 @@ export const getContestById = data =>
 
 export const setNewOffer = data => http.post('setNewOffer', data)
 export const setOfferStatus = data => http.post('setOfferStatus', data)
+export const getOffers = data =>
+  http.get('getOffers', {
+    params: {
+      data
+    }
+  })
 
 // Chat
 export const getPreviewChat = () => http.get('getPreview')
