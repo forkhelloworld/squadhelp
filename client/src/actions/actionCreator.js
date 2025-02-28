@@ -101,6 +101,11 @@ export const setOfferStatus = data => ({
   data
 })
 
+export const getOffers = data => ({
+  type: ACTION.GET_OFFERS_REQUEST,
+  data
+})
+
 export const createCatalog = data => ({
   type: ACTION.CREATE_CATALOG_REQUEST,
   data

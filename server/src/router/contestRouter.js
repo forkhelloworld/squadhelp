@@ -54,8 +54,10 @@ contestRouter.post(
 contestRouter.post(
   '/setOfferStatus',
   checkToken.checkToken,
-  basicMiddlewares.onlyForCustomerWhoCreateContest,
+  basicMiddlewares.onlyForCustomerWhoCreateContestOrModerator,
   contestController.setOfferStatus
 )
+
+contestRouter.get('/getOffers', checkToken.checkToken, contestController.getOffers)
 
 module.exports = contestRouter

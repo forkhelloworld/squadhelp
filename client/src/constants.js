@@ -2,6 +2,7 @@ const env = process.env.NODE_ENV || 'development'
 const serverIP = 'localhost'
 const serverPort = 3000
 const constants = {
+  MODERATOR: 'moderator',
   CUSTOMER: 'customer',
   CREATOR: 'creator',
   CONTEST_STATUS_ACTIVE: 'active',
@@ -13,6 +14,8 @@ const constants = {
   OFFER_STATUS_REJECTED: 'rejected',
   OFFER_STATUS_WON: 'won',
   OFFER_STATUS_PENDING: 'pending',
+  OFFER_STATUS_REVIEW: 'review',
+  OFFER_STATUS_DENIED: 'denied',
   STATIC_IMAGES_PATH: '/staticImages/',
   ANONYM_IMAGE_PATH: '/staticImages/anonym.png',
   BASE_URL: `http://${serverIP}:${serverPort}/`,

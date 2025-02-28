@@ -39,21 +39,23 @@ class ContestPage extends React.Component {
   }
 
   setOffersList = () => {
-    const array = []
-    for (let i = 0; i < this.props.contestByIdStore.offers.length; i++) {
-      array.push(
-        <OfferBox
-          data={this.props.contestByIdStore.offers[i]}
-          key={this.props.contestByIdStore.offers[i].id}
-          needButtons={this.needButtons}
-          setOfferStatus={this.setOfferStatus}
-          contestType={this.props.contestByIdStore.contestData.contestType}
-          date={new Date()}
-        />
-      )
-    }
-    return array.length !== 0 ? (
-      array
+    const offers = this.props.contestByIdStore.offers.reduce((acc, offer) => {
+      if (offer.status !== 'review' && offer.status !== 'denied') {
+        acc.push(
+          <OfferBox
+            data={offer}
+            key={offer.id}
+            needButtons={this.needButtons}
+            setOfferStatus={this.setOfferStatus}
+            contestType={this.props.contestByIdStore.contestData.contestType}
+            date={new Date()}
+          />
+        )
+      }
+      return acc
+    }, [])
+    return offers.length !== 0 ? (
+      offers
     ) : (
       <div className={styles.notFound}>
         There is no suggestion at this moment
@@ -130,9 +132,9 @@ class ContestPage extends React.Component {
       isFetching,
       isBrief,
       contestData,
-      offers,
       setOfferStatusError
     } = contestByIdStore
+    const offers = this.setOffersList()
     return (
       <div>
         {/* <Chat/> */}
@@ -197,7 +199,7 @@ class ContestPage extends React.Component {
                       clearError={clearSetOfferStatusError}
                     />
                   )}
-                  <div className={styles.offers}>{this.setOffersList()}</div>
+                  <div className={styles.offers}>{offers}</div>
                 </div>
               )}
             </div>
