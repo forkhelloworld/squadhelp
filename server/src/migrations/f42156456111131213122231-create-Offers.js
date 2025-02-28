@@ -1,6 +1,7 @@
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Offers', {
+    return queryInterface.createTable('offers', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -8,36 +9,40 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER,
+        field: 'user_id',
         allowNull: false,
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'User',
           key: 'id'
         }
       },
       contestId: {
-        type: Sequelize.INTEGER,
+        field: 'contest_id',
         allowNull: false,
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Contests',
+          model: 'Contest',
           key: 'id'
         }
       },
       text: {
-        type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
+        type: Sequelize.STRING
       },
       fileName: {
-        type: Sequelize.STRING,
-        allowNull: true
+        field: 'file_name',
+        allowNull: true,
+        type: Sequelize.STRING
       },
       originalFileName: {
-        type: Sequelize.STRING,
-        allowNull: true
+        field: 'original_file_name',
+        allowNull: true,
+        type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.STRING,
         allowNull: true,
+        type: Sequelize.STRING,
         defaultValue: 'pending'
       }
     })

@@ -1,7 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface
-      .createTable('Users', {
+      .createTable('users', {
         id: {
           allowNull: false,
           autoIncrement: true,
@@ -9,14 +9,17 @@ module.exports = {
           type: Sequelize.INTEGER
         },
         firstName: {
+          field: 'first_name',
           type: Sequelize.STRING,
           allowNull: false
         },
         lastName: {
+          field: 'last_name',
           type: Sequelize.STRING,
           allowNull: false
         },
         displayName: {
+          field: 'display_name',
           type: Sequelize.STRING,
           allowNull: false
         },
@@ -41,9 +44,13 @@ module.exports = {
         balance: {
           type: Sequelize.DECIMAL,
           allowNull: false,
-          defaultValue: 0
+          defaultValue: 0,
+          validate: {
+            min: 0
+          }
         },
         accessToken: {
+          field: 'access_token',
           type: Sequelize.TEXT,
           allowNull: true
         },
@@ -54,7 +61,7 @@ module.exports = {
         }
       })
       .then(() =>
-        queryInterface.addConstraint('Users', {
+        queryInterface.addConstraint('users', {
           type: 'check',
           fields: ['balance'],
           where: {
@@ -66,6 +73,6 @@ module.exports = {
       )
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users')
+    return queryInterface.dropTable('users')
   }
 }

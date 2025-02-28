@@ -1,6 +1,15 @@
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    'Users',
+  class User extends Model {
+    static associate(models) {
+      User.hasMany(models.Offer, { foreignKey: 'user_id', targetKey: 'id' })
+      User.hasMany(models.Contest, { foreignKey: 'user_id', targetKey: 'id' })
+      User.hasMany(models.Rating, { foreignKey: 'user_id', targetKey: 'id' })
+    }
+  }
+
+  User.init(
     {
       id: {
         allowNull: false,
@@ -9,14 +18,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER
       },
       firstName: {
+        field: 'first_name',
         type: DataTypes.STRING,
         allowNull: false
       },
       lastName: {
+        field: 'last_name',
         type: DataTypes.STRING,
         allowNull: false
       },
       displayName: {
+        field: 'display_name',
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -47,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       accessToken: {
+        field: 'access_token',
         type: DataTypes.TEXT,
         allowNull: true
       },
@@ -57,15 +70,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
-      timestamps: false
+      timestamps: false,
+      tableName: 'users',
+      modelName: 'User'
     }
   )
-
-  User.associate = function (models) {
-    User.hasMany(models.Offers, { foreignKey: 'userId', targetKey: 'id' })
-    User.hasMany(models.Contests, { foreignKey: 'userId', targetKey: 'id' })
-    User.hasMany(models.Ratings, { foreignKey: 'userId', targetKey: 'id' })
-  }
 
   return User
 }
