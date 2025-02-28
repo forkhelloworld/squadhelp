@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS conversations (
-  id int PRIMARY KEY
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS conversation_participants (
@@ -11,13 +11,19 @@ CREATE TABLE IF NOT EXISTS conversation_participants (
 );
 
 CREATE TABLE IF NOT EXISTS messages (
-    conversation int REFERENCES conversations,
-    sender int REFERENCES "Users",
-    body TEXT NOT NULL CHECK (body != '')
+  conversation int REFERENCES conversations,
+  sender int REFERENCES "Users",
+  body TEXT NOT NULL CHECK (body != '')
 );
 
 CREATE TABLE IF NOT EXISTS catalogs (
-    user_id int REFERENCES "Users",
-    name varchar(256) NOT NULL CHECK (catalogName != ''),
-    chat int REFERENCES conversations
+  id serial PRIMARY KEY,
+  user_id int REFERENCES "Users",
+  name varchar(256) NOT NULL CHECK (catalogName != '')
+);
+
+CREATE TABLE IF NOT EXISTS catalogs_chats (
+  id serial PRIMARY KEY,
+  catalog_id int REFERENCES catalogs,
+  chat_id int REFERENCES conversations
 );
