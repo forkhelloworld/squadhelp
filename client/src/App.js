@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import { ToastContainer } from 'react-toastify'
 import LoginPage from './pages/LoginPage/LoginPage'
+import Events from './pages/Events/Events'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import Payment from './pages/Payment/Payment'
 import StartContestPage from './pages/StartContestPage/StartContestPage'
@@ -83,6 +84,7 @@ class App extends Component {
             component={PrivateHoc(ContestPage)}
           />
           <Route exact path='/account' component={PrivateHoc(UserProfile)} />
+          <Route exact path='/events' component={Events} />
           <Route exact path='/how-it-works' component={HowItWorks} />
           <Route component={NotFound} />
         </Switch>
