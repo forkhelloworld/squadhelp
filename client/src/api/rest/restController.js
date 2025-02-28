@@ -66,10 +66,11 @@ export const changeChatBlock = data => http.post('blackList', data)
 export const getDialog = data => http.get('getChat', { params: data })
 
 export const removeChatFromCatalog = data =>
-  http.delete('removeChatFromCatalog', data)
+  http.delete('removeChatFromCatalog', { params: data })
 export const addChatToCatalog = data => http.post('addNewChatToCatalog', data)
 export const getCatalogList = data => http.get('getCatalogs', data)
 export const createCatalog = data => http.post('createCatalog', data)
-export const deleteCatalog = data => http.delete('deleteCatalog', data)
+export const deleteCatalog = data =>
+  http.delete('deleteCatalog', { params: data })
 export const changeCatalogName = data => http.put('updateNameCatalog', data)
 export const newMessage = data => http.post('newMessage', data)
