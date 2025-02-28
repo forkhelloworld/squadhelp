@@ -1,20 +1,41 @@
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  const Rating = sequelize.define(
-    'Ratings',
+  class Rating extends Model {
+    static associate (models) {
+      Rating.belongsTo(models.User, { foreignKey: 'user_id', targetKey: 'id' })
+      Rating.belongsTo(models.Offer, {
+        foreignKey: 'offer_id',
+        targetKey: 'id'
+      })
+    }
+  }
+
+  Rating.init(
     {
       offerId: {
+        field: 'offer_id',
         allowNull: false,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Offer',
+          key: 'id'
+        }
       },
       userId: {
-        type: DataTypes.INTEGER,
+        field: 'user_id',
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'User',
+          key: 'id'
+        }
       },
       mark: {
-        type: DataTypes.FLOAT,
         allowNull: false,
+        type: DataTypes.FLOAT,
         defaultValue: 0,
         validate: {
           min: 0,
@@ -23,17 +44,12 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
-      timestamps: false
+      timestamps: false,
+      underscored: true,
+      tableName: 'ratings',
+      modelName: 'Rating'
     }
   )
-
-  Rating.associate = function (models) {
-    Rating.belongsTo(models.Users, { foreignKey: 'userId', targetKey: 'id' })
-    Rating.belongsTo(models.Offers, {
-      foreignKey: 'offerId',
-      targetKey: 'id'
-    })
-  }
 
   return Rating
 }

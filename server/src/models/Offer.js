@@ -1,6 +1,18 @@
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  const Offer = sequelize.define(
-    'Offers',
+  class Offer extends Model {
+    static associate (models) {
+      Offer.belongsTo(models.User, { foreignKey: 'user_id', sourceKey: 'id' })
+      Offer.belongsTo(models.Contest, {
+        foreignKey: 'contest_id',
+        sourceKey: 'id'
+      })
+      Offer.hasOne(models.Rating, { foreignKey: 'offer_id', targetKey: 'id' })
+    }
+  }
+
+  Offer.init(
     {
       id: {
         allowNull: false,
@@ -9,44 +21,50 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER
       },
       userId: {
+        field: 'user_id',
+        allowNull: false,
         type: DataTypes.INTEGER,
-        allowNull: false
+        references: {
+          model: 'User',
+          key: 'id'
+        }
       },
       contestId: {
+        field: 'contest_id',
+        allowNull: false,
         type: DataTypes.INTEGER,
-        allowNull: false
+        references: {
+          model: 'Contest',
+          key: 'id'
+        }
       },
       text: {
-        type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        type: DataTypes.STRING
       },
       fileName: {
-        type: DataTypes.STRING,
-        allowNull: true
+        field: 'file_name',
+        allowNull: true,
+        type: DataTypes.STRING
       },
       originalFileName: {
-        type: DataTypes.STRING,
-        allowNull: true
+        field: 'original_file_name',
+        allowNull: true,
+        type: DataTypes.STRING
       },
       status: {
-        type: DataTypes.STRING,
         allowNull: true,
+        type: DataTypes.STRING,
         defaultValue: 'pending'
       }
     },
     {
-      timestamps: false
+      timestamps: false,
+      underscored: true,
+      tableName: 'offers',
+      modelName: 'Offer'
     }
   )
-
-  Offer.associate = function (models) {
-    Offer.belongsTo(models.Users, { foreignKey: 'userId', sourceKey: 'id' })
-    Offer.belongsTo(models.Contests, {
-      foreignKey: 'contestId',
-      sourceKey: 'id'
-    })
-    Offer.hasOne(models.Ratings, { foreignKey: 'offerId', targetKey: 'id' })
-  }
 
   return Offer
 }

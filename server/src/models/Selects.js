@@ -1,6 +1,9 @@
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  const SelectBox = sequelize.define(
-    'Selects',
+  class Select extends Model {}
+
+  SelectBox.init(
     {
       type: {
         allowNull: false,
@@ -14,9 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
-      timestamps: false
+      timestamps: false,
+      tableName: 'selects',
+      modelName: 'Select'
     }
   )
 
-  return SelectBox
+  return Select
 }
