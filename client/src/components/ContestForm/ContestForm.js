@@ -13,6 +13,7 @@ import FormTextArea from '../InputComponents/FormTextArea/FormTextArea'
 import TryAgain from '../TryAgain/TryAgain'
 import Schems from '../../validators/validationSchems'
 import OptionalSelects from '../OptionalSelects/OptionalSelects'
+import ButtonGroup from "../ButtonGroup/ButtonGroup"
 
 const variableOptions = {
   [CONSTANTS.NAME_CONTEST]: {
@@ -151,6 +152,7 @@ class ContestForm extends React.Component {
                 }}
                 type='file'
               />
+              <ButtonGroup />
               {this.props.isEditContest ? (
                 <button type='submit' className={styles.changeData}>
                   Set Data
