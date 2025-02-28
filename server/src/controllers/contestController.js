@@ -5,6 +5,7 @@ const userQueries = require('./queries/userQueries')
 const controller = require('../socketInit')
 const UtilFunctions = require('../utils/functions')
 const CONSTANTS = require('../constants')
+const { sendMail } = require('../utils/mailer')
 
 module.exports.dataForContest = async (req, res, next) => {
   const response = {}
@@ -237,6 +238,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
   } else if (req.body.command === 'pending') {
     try {
       const offer = await reviewOffer(req.body.offerId, req.body.command)
+      sendMail(req.tokenData.email, 'Your offer has been accepted by moderation.')
       res.send(offer)
     } catch (err) {
       next(err)
@@ -244,6 +246,8 @@ module.exports.setOfferStatus = async (req, res, next) => {
   } else if (req.body.command === 'denied') {
     try {
       const offer = await reviewOffer(req.body.offerId, req.body.command)
+      sendMail(req.tokenData.email, 'Your offer was not accepted by moderation.')
+      res.send(offer)
       res.send(offer)
     } catch (err) {
       next(err)
