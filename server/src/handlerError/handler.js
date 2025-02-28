@@ -1,3 +1,5 @@
+const errorLogger = require('../errorLogger')
+
 module.exports = (err, req, res, next) => {
   console.log(err)
   if (
@@ -10,8 +12,10 @@ module.exports = (err, req, res, next) => {
     err.code = 406
   }
   if (!err.message || !err.code) {
+    errorLogger.logError(err)
     res.status(500).send('Server Error')
   } else {
+    errorLogger.logError(err)
     res.status(err.code).send(err.message)
   }
 }
