@@ -1,7 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      'Selects',
+      'selects',
       [
         {
           type: 'typeOfName',
