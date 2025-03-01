@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Message extends Model {
     static associate (models) {
       Message.belongsTo(models.Conversation, { foreignKey: 'conversation' })
-      Message.belongsTo(models.Users, { foreignKey: 'sender' })
+      Message.belongsTo(models.User, { foreignKey: 'sender' })
     }
   }
   Message.init(

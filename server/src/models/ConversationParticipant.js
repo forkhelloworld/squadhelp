@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       ConversationParticipant.belongsTo(models.Conversation, {
         foreignKey: 'chat_id'
       })
-      ConversationParticipant.belongsTo(models.Users, { foreignKey: 'user_id' })
+      ConversationParticipant.belongsTo(models.User, { foreignKey: 'user_id' })
     }
   }
   ConversationParticipant.init(

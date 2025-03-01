@@ -125,12 +125,12 @@ module.exports.payment = async (req, res, next) => {
       {
         balance: bd.sequelize.literal(`
                 CASE
-            WHEN "cardNumber"='${req.body.number.replace(
+            WHEN "card_number"='${req.body.number.replace(
               / /g,
               ''
             )}' AND "cvc"='${req.body.cvc}' AND "expiry"='${req.body.expiry}'
                 THEN "balance"-${req.body.price}
-            WHEN "cardNumber"='${CONSTANTS.SQUADHELP_BANK_NUMBER}' AND "cvc"='${
+            WHEN "card_number"='${CONSTANTS.SQUADHELP_BANK_NUMBER}' AND "cvc"='${
           CONSTANTS.SQUADHELP_BANK_CVC
         }' AND "expiry"='${CONSTANTS.SQUADHELP_BANK_EXPIRY}'
                 THEN "balance"+${req.body.price} END
@@ -147,6 +147,7 @@ module.exports.payment = async (req, res, next) => {
       transaction
     )
     const orderId = uuid()
+    console.log(orderId);
     req.body.contests.forEach((contest, index) => {
       const prize =
         index === req.body.contests.length - 1
@@ -154,14 +155,14 @@ module.exports.payment = async (req, res, next) => {
           : Math.floor(req.body.price / req.body.contests.length)
       contest = Object.assign(contest, {
         status: index === 0 ? 'active' : 'pending',
-        userId: req.tokenData.userId,
+        user_id: req.tokenData.userId,
         priority: index + 1,
         orderId,
-        createdAt: moment().format('YYYY-MM-DD HH:mm'),
+        created_at: moment().format('YYYY-MM-DD HH:mm'),
         prize
       })
     })
-    await bd.Contests.bulkCreate(req.body.contests, transaction)
+    await bd.Contest.bulkCreate(req.body.contests, transaction)
     transaction.commit()
     res.send()
   } catch (err) {

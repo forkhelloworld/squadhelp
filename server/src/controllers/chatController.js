@@ -134,7 +134,7 @@ module.exports.getPreview = async (req, res, next) => {
           p => p.user_id !== userId
         )?.user_id
 
-        const interlocutor = await db.Users.findByPk(interlocutorId, {
+        const interlocutor = await db.User.findByPk(interlocutorId, {
           attributes: ['id', 'firstName', 'lastName', 'displayName', 'avatar']
         })
 

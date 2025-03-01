@@ -3,7 +3,7 @@ const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Select extends Model {}
 
-  SelectBox.init(
+  Select.init(
     {
       type: {
         allowNull: false,
@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
+      sequelize,
       timestamps: false,
       tableName: 'selects',
       modelName: 'Select'

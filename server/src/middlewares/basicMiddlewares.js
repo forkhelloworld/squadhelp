@@ -21,11 +21,11 @@ module.exports.canGetContest = async (req, res, next) => {
   const id = req.query.contestId
   try {
     if (req.tokenData.role === CONSTANTS.CUSTOMER) {
-      result = await bd.Contests.findOne({
-        where: { id, userId: req.tokenData.userId }
+      result = await bd.Contest.findOne({
+        where: { id, user_id: req.tokenData.userId }
       })
     } else if (req.tokenData.role === CONSTANTS.CREATOR) {
-      result = await bd.Contests.findOne({
+      result = await bd.Contest.findOne({
         where: {
           id,
           status: {

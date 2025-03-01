@@ -15,7 +15,7 @@ module.exports.dataForContest = async (req, res, next) => {
     } = req
     const types = [characteristic1, characteristic2, 'industry'].filter(Boolean)
 
-    const characteristics = await db.Selects.findAll({
+    const characteristics = await db.Select.findAll({
       where: {
         type: {
           [db.Sequelize.Op.or]: types
@@ -39,38 +39,38 @@ module.exports.dataForContest = async (req, res, next) => {
 
 module.exports.getContestById = async (req, res, next) => {
   try {
-    let contestInfo = await db.Contests.findOne({
+    let contestInfo = await db.Contest.findOne({
       where: { id: +req.query.contestId },
-      order: [[db.Offers, 'id', 'asc']],
+      order: [[db.Offer, 'id', 'asc']],
       include: [
         {
-          model: db.Users,
+          model: db.User,
           required: true,
           attributes: {
-            exclude: ['password', 'role', 'balance', 'accessToken']
+            exclude: ['password', 'role', 'balance', 'access_token']
           }
         },
         {
-          model: db.Offers,
+          model: db.Offer,
           required: false,
           where:
             req.tokenData.role === CONSTANTS.CREATOR
-              ? { userId: req.tokenData.userId }
+              ? { user_id: req.tokenData.userId }
               : {},
-          attributes: { exclude: ['userId', 'contestId'] },
+          attributes: { exclude: ['user_id', 'contest_id'] },
           include: [
             {
-              model: db.Users,
+              model: db.User,
               required: true,
               attributes: {
-                exclude: ['password', 'role', 'balance', 'accessToken']
+                exclude: ['password', 'role', 'balance', 'access_token']
               }
             },
             {
-              model: db.Ratings,
+              model: db.Rating,
               required: false,
               where: { userId: req.tokenData.userId },
-              attributes: { exclude: ['userId', 'offerId'] }
+              attributes: { exclude: ['user_id', 'offer_id'] }
             }
           ]
         }
@@ -85,6 +85,7 @@ module.exports.getContestById = async (req, res, next) => {
     })
     res.send(contestInfo)
   } catch (e) {
+    console.log(e);
     next(new ServerError())
   }
 }
@@ -104,7 +105,7 @@ module.exports.updateContest = async (req, res, next) => {
   try {
     const updatedContest = await contestQueries.updateContest(req.body, {
       id: contestId,
-      userId: req.tokenData.userId
+      user_id: req.tokenData.userId
     })
     res.send(updatedContest)
   } catch (e) {
@@ -115,17 +116,17 @@ module.exports.updateContest = async (req, res, next) => {
 module.exports.setNewOffer = async (req, res, next) => {
   const obj = { status:CONSTANTS.OFFER_STATUS_PENDING }
   if (req.body.contestType === CONSTANTS.LOGO_CONTEST) {
-    obj.fileName = req.file.filename
-    obj.originalFileName = req.file.originalname
+    obj.file_name = req.file.filename
+    obj.original_file_name = req.file.originalname
   } else {
     obj.text = req.body.offerData
   }
-  obj.userId = req.tokenData.userId
-  obj.contestId = req.body.contestId
+  obj.user_id = req.tokenData.userId
+  obj.contest_id = req.body.contestId
   try {
     const result = await contestQueries.createOffer(obj)
-    delete result.contestId
-    delete result.userId
+    delete result.contest_id
+    delete result.user_id
     controller.getNotificationController().emitEntryCreated(req.body.customerId)
     const User = Object.assign({}, req.tokenData, { id: req.tokenData.userId })
     res.send(Object.assign({}, result, { User }))
@@ -160,10 +161,10 @@ const resolveOffer = async (
   const finishedContest = await contestQueries.updateContestStatus(
     {
       status: db.sequelize.literal(`   CASE
-            WHEN "id"=${contestId}  AND "orderId"='${orderId}' THEN '${
+            WHEN "id"=${contestId}  AND "order_id"='${orderId}' THEN '${
         CONSTANTS.CONTEST_STATUS_FINISHED
       }'
-            WHEN "orderId"='${orderId}' AND "priority"=${priority + 1}  THEN '${
+            WHEN "order_id"='${orderId}' AND "priority"=${priority + 1}  THEN '${
         CONSTANTS.CONTEST_STATUS_ACTIVE
       }'
             ELSE '${CONSTANTS.CONTEST_STATUS_PENDING}'
@@ -248,7 +249,6 @@ module.exports.setOfferStatus = async (req, res, next) => {
       const offer = await reviewOffer(req.body.offerId, req.body.command)
       sendMail(req.tokenData.email, 'Your offer was not accepted by moderation.')
       res.send(offer)
-      res.send(offer)
     } catch (err) {
       next(err)
     }
@@ -272,14 +272,14 @@ module.exports.setOfferStatus = async (req, res, next) => {
 }
 
 module.exports.getCustomersContests = (req, res, next) => {
-  db.Contests.findAll({
-    where: { status: req.headers.status, userId: req.tokenData.userId },
+  db.Contest.findAll({
+    where: { status: req.headers.status, user_id: req.tokenData.userId },
     limit: req.query.limit,
     offset: req.query.offset ? req.query.offset : 0,
     order: [['id', 'DESC']],
     include: [
       {
-        model: db.Offers,
+        model: db.Offer,
         required: false,
         attributes: ['id']
       }
@@ -315,9 +315,9 @@ module.exports.getContests = (req, res, next) => {
     offset: req.query.offset ? req.query.offset : 0,
     include: [
       {
-        model: db.Offers,
+        model: db.Offer,
         required: req.query.ownEntries,
-        where: req.query.ownEntries ? { userId: req.tokenData.userId } : {},
+        where: req.query.ownEntries ? { user_id: req.tokenData.userId } : {},
         attributes: ['id']
       }
     ]
@@ -339,7 +339,7 @@ module.exports.getContests = (req, res, next) => {
 
 module.exports.getOffers = async (req, res, next) => {
   try {
-    const offers = await db.Offers.findAll({ order: [['id', 'DESC']], limit: 8, offset:req.query.offset })
+    const offers = await db.Offer.findAll({ order: [['id', 'DESC']], limit: 8, offset:req.query.offset })
     res.status(200).send({ offers })
   } catch (error) {
     next(error)
