@@ -33,14 +33,14 @@ services:
 
 
   mongo-dev:
-    image: mongo:4.4.6-bionic
+    image: mongo:4.2.24-bionic
     ports:
       - "27017:27017"
 
 
 
   db-dev:
-    image: postgres:13.2-alpine
+    image: postgres:16.8-alpine3.20
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
