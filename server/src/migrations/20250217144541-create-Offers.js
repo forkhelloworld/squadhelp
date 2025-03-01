@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'User',
+          model: 'users',
           key: 'id'
         }
       },
@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Contest',
+          model: 'contests',
           key: 'id'
         }
       },
@@ -48,6 +48,6 @@ module.exports = {
     })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Offers')
+    return queryInterface.dropTable('offers')
   }
 }
