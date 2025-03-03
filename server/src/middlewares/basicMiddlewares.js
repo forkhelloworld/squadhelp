@@ -1,5 +1,4 @@
 const bd = require('../models')
-const NotFound = require('../errors/UserNotFoundError')
 const RightsError = require('../errors/RightsError')
 const ServerError = require('../errors/ServerError')
 const CONSTANTS = require('../constants')
@@ -64,7 +63,7 @@ module.exports.canSendOffer = async (req, res, next) => {
     return next(new RightsError())
   }
   try {
-    const result = await bd.Contests.findOne({
+    const result = await bd.Contest.findOne({
       where: {
         id: req.body.contestId
       },
@@ -87,9 +86,9 @@ module.exports.onlyForCustomerWhoCreateContestOrModerator = async (req, res, nex
     if (req.tokenData.role === 'moderator'){
       return next()
     }
-    const result = await bd.Contests.findOne({
+    const result = await bd.Contest.findOne({
       where: {
-        userId: req.tokenData.userId,
+        user_id: req.tokenData.userId,
         id: req.body.contestId,
         status: CONSTANTS.CONTEST_STATUS_ACTIVE
       }
@@ -105,7 +104,7 @@ module.exports.onlyForCustomerWhoCreateContestOrModerator = async (req, res, nex
 
 module.exports.canUpdateContest = async (req, res, next) => {
   try {
-    const result = bd.Contests.findOne({
+    const result = bd.Contest.findOne({
       where: {
         userId: req.tokenData.userId,
         id: req.body.contestId,

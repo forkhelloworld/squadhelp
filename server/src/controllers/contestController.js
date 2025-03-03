@@ -114,15 +114,15 @@ module.exports.updateContest = async (req, res, next) => {
 }
 
 module.exports.setNewOffer = async (req, res, next) => {
-  const obj = { status:CONSTANTS.OFFER_STATUS_PENDING }
+  const obj = { status:CONSTANTS.OFFER_STATUS_REVIEW }
   if (req.body.contestType === CONSTANTS.LOGO_CONTEST) {
     obj.file_name = req.file.filename
     obj.original_file_name = req.file.originalname
   } else {
     obj.text = req.body.offerData
   }
-  obj.user_id = req.tokenData.userId
-  obj.contest_id = req.body.contestId
+  obj.userId = req.tokenData.userId
+  obj.contestId = req.body.contestId
   try {
     const result = await contestQueries.createOffer(obj)
     delete result.contest_id
@@ -131,6 +131,7 @@ module.exports.setNewOffer = async (req, res, next) => {
     const User = Object.assign({}, req.tokenData, { id: req.tokenData.userId })
     res.send(Object.assign({}, result, { User }))
   } catch (e) {
+    console.log(e);
     return next(new ServerError())
   }
 }
@@ -308,7 +309,7 @@ module.exports.getContests = (req, res, next) => {
     req.query.awardSort
   )
 
-  db.Contests.findAll({
+  db.Contest.findAll({
     where: predicates.where,
     order: predicates.order,
     limit: req.query.limit,
